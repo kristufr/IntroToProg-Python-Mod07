@@ -24,23 +24,20 @@ students: list = []  # a table of student data
 menu_choice: str = ""  # Hold the choice made by the user.
 
 
-# TODO Create a Person Class
 class Person:
-    '''
+    """
     A class representing a person with 1st and last names
 
     Properties - first (str) and last name (str)
 
     Changelog:
     C.Cipolla 2/28/2024, Created Class
-    '''
+    """
 
-    # TODO Add first_name and last_name properties to the constructor (Done)
     def __init__(self, first_name: str = "", last_name: str = ""):
         self.first_name = first_name
         self.last_name = last_name
 
-    # TODO Create a getter and setter for the first_name property (Done)
     @property  # getter or accessor returns first name
     def first_name(self) -> str:
         return self.__first_name.title()
@@ -52,7 +49,6 @@ class Person:
         else:
             raise ValueError("The first name should only contain letters.")
 
-    # TODO Create a getter and setter for the last_name property (Done)
     @property  # getter returns last name
     def last_name(self) -> str:
         return self.__last_name.title()
@@ -64,14 +60,12 @@ class Person:
         else:
             raise ValueError("The last name should only contain letters.")
 
-    # TODO Override the __str__() method to return Person data (Done)
     def __str__(self):
         return f"{self.first_name},{self.last_name}"
 
 
-# TODO Create a Student class the inherits from the Person class (Done)
 class Student(Person):
-    '''
+    """
     Creates a Student Class that inherits Person class attributes
 
     Properties: first (str) and last names (str) from Person Class plus
@@ -79,28 +73,23 @@ class Student(Person):
 
     Changelog:
     C.Cipolla 2/28/2024, Created Class
-    '''
+    """
 
-    # TODO call to the Person constructor and pass it the first_name and last_name data (Done)
-    def __init__(self, first_name: str ="", last_name: str ="", course_name: str =""):
+    def __init__(self, first_name: str = "", last_name: str = "", course_name: str = ""):
         super().__init__(first_name=first_name, last_name=last_name)
 
-        # TODO add an assignment to the course_name property using the course_name parameter (Done)
         self.course_name = course_name
 
-    # TODO add the getter for course_name (Done)
     @property
     def course_name(self):
-        return self.__course_name
+        return self.__course_name.upper()
 
-    # TODO add the setter for course_name (Done)
     @course_name.setter
     def course_name(self, value: str):
         self.__course_name = value.upper()
 
-    # TODO Override the __str__() method to return the Student data (Done)
     def __str__(self):
-        return f"{Person(self)},{self.course_name}"
+        return f"{self.first_name},{self.last_name},{self.course_name}"
 
 
 # Processing --------------------------------------- #
@@ -202,7 +191,7 @@ class IO:
 
     @staticmethod
     def output_error_messages(message: str, error: Exception = None):
-        """ This function displays the a custom error messages to the user
+        """ This function displays a custom error messages to the user
 
         ChangeLog: (Who, When, What)
         RRoot,1.3.2030,Created function
@@ -310,7 +299,7 @@ class IO:
 students = FileProcessor.read_data_from_file(file_name=FILE_NAME, student_data=students)
 
 # Present and Process the data
-while (True):
+while True:
 
     # Present the menu of choices
     IO.output_menu(menu=MENU)
