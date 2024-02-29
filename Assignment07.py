@@ -134,12 +134,17 @@ class FileProcessor:
         except Exception as e:
             IO.output_error_messages(message="Error: There was a problem with reading the file.", error=e)
 
-        else:  # If try is successful
-            if file.closed is False:
-                file.close()
-
         finally:
-            return student_data
+            # if file.closed is False:
+            #     file.close()
+            try:
+                if file.closed is False:
+                    file.close()
+            except UnboundLocalError as e:
+                IO.output_error_messages(message="\nError: Can't close a file that doesn't exist.\n"
+                                                 "Check the constant FILE_NAME.", error=e)
+
+        return student_data
 
     @staticmethod
     def write_data_to_file(file_name: str, student_data: list):
